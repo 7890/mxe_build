@@ -39,7 +39,7 @@ DEFS = -Wno-invalid-offsetof
 
 #CFLAGS = $(TFLAGS) -c -Wall -O5 -g
 
-CFLAGS = -c -Iinc -Wall -O0 -g $(DEFS)
+CFLAGS = -c -Iinc -Wall -Wno-deprecated -Wno-write-strings -O0 -g $(DEFS)
 #CFLAGS = -c -Iinc -Wall -O0 -DFASTDB_DEBUG=DEBUG_TRACE -g $(DEFS)
 
 

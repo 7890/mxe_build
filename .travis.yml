@@ -55,7 +55,7 @@ deploy:
 
 after_deploy:
   - ARTIFACT_FILE=$(ls -1tr "${TRAVIS_BUILD_DIR}/../pages_out" | tail -1)
-  - echo "https://7890.github.io/mxe_deploy/${ARTIFACT_FILE}"
+#  - echo "https://7890.github.io/mxe_deploy/${ARTIFACT_FILE}"
 
 branches:
   only:
