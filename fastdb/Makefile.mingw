@@ -34,14 +34,8 @@ WEB_EXAMPLES = cgistub.exe bugdb.exe clidb.exe
 
 CC = $(CMD_PREFIX)g++
 
-# DEFS macro is deprecatred, edit inc/config.h file instead
-DEFS = -Wno-invalid-offsetof
-
-#CFLAGS = $(TFLAGS) -c -Wall -O5 -g
-
-CFLAGS = -c -Iinc -Wall -Wno-deprecated -Wno-write-strings -O0 -g $(DEFS)
-#CFLAGS = -c -Iinc -Wall -O0 -DFASTDB_DEBUG=DEBUG_TRACE -g $(DEFS)
-
+#CFLAGS = -c -Iinc -Wall -O0 -DFASTDB_DEBUG=DEBUG_TRACE -g
+CFLAGS = -c -Iinc -Wall -Wno-deprecated -Wno-write-strings -O0 -g
 
 #LD = $(CMD_PREFIX)ld
 LD = $(CC)
