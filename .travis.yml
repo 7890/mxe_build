@@ -24,7 +24,8 @@ before_script:
   - .ci/handle_cache.sh
 
 script:
-  - echo "nothing to do"
+#  - echo "nothing to do"
+  - jack2/make.sh
 
 after_script:
 
@@ -38,7 +39,8 @@ after_failure:
   - echo "build failed. not lucky today."
 
 before_deploy:
-  - DO_DEPLOY = "no"
+#  - DO_DEPLOY = "no"
+  - DO_DEPLOY = "yes"
 
 deploy:
   provider: pages

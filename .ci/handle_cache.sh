@@ -48,7 +48,7 @@ initial_mxe_build()
 #initial_mxe_build i686-w64-mingw32.shared
 #initial_mxe_build i686-w64-mingw32.static
 #initial_mxe_build x86_64-w64-mingw32.shared
-initial_mxe_build x86_64-w64-mingw32.static
+#initial_mxe_build x86_64-w64-mingw32.static
 #=============
 
 #EOF
