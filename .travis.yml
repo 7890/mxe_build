@@ -1,0 +1,65 @@
+language:
+  - cpp
+
+cache:
+  bundler: true
+  timeout: 1000 #seconds
+  directories:
+    - "${TRAVIS_BUILD_DIR}/../mxe/"
+
+matrix:
+  include:
+    # linux with gcc default (4.8)
+    - os: linux
+      dist: trusty
+      compiler: gcc
+
+before_install:
+  - sudo apt-get -qq update
+
+install:
+  - .ci/install-deps.sh
+
+before_script:
+  - .ci/handle_cache.sh
+
+script:
+  - echo "nothing to do"
+
+after_script:
+
+before_cache:
+  - ls -l "${TRAVIS_BUILD_DIR}/../mxe/"
+
+after_success:
+  - echo "build was succesful. fantastic!"
+
+after_failure:
+  - echo "build failed. not lucky today."
+
+before_deploy:
+  - DO_DEPLOY = "no"
+
+deploy:
+  provider: pages
+  local-dir: "${TRAVIS_BUILD_DIR}/../pages_out"
+  skip-cleanup: true
+  keep-history: true
+  github-token: "${FOO_BAR}"
+  repo: 7890/mxe_deploy
+  target-branch: master
+  on:
+    branch: master
+    condition: ${DO_DEPLOY} = "yes"
+
+after_deploy:
+  - ARTIFACT_FILE=$(ls -1tr "${TRAVIS_BUILD_DIR}/../pages_out" | tail -1)
+  - echo "https://7890.github.io/mxe_deploy/${ARTIFACT_FILE}"
+
+branches:
+  only:
+    - /.*/
+
+notifications:
+  email: false
+
