@@ -20,9 +20,6 @@ initial_mxe_build()
 	#starting dummy output: some targets take a long time, travis would stop after 10min without output
 	 "${TRAVIS_BUILD_DIR}/.ci/dummy_output.sh" &
 
-	unzip "${CACHE_DIR}/asio/asiosdk2.3.zip"
-	sudo mv ASIOSDK2.3 /usr/local/asiosdk2
-
 	INITIAL_PACKAGES="cc cmake waf libsndfile db libsamplerate portaudio libgnurx readline liblo"
 
 	echo "mxe HEAD is `git rev-parse HEAD`"
@@ -48,7 +45,7 @@ portaudio_asio()
 	cd "${CACHE_DIR}"
 
 	git checkout src/portaudio.mk
-	cp "${CACHE_DIR}/jack2/portaudio.mk.diff" .
+	cp "${TRAVIS_BUILD_DIR}/jack2/portaudio.mk.diff" .
 	patch -p 1 < portaudio.mk.diff
 
 	#https://github.com/spatialaudio/portaudio-binaries
