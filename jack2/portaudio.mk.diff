@@ -1,0 +1,29 @@
+diff --git a/src/portaudio.mk b/src/portaudio.mk
+index d1673ce..bf97aaa 100644
+--- a/src/portaudio.mk
++++ b/src/portaudio.mk
+@@ -25,17 +25,18 @@ define $(PKG)_BUILD
+     cd '$(1)' && ./configure \
+         $(MXE_CONFIGURE_OPTS) \
+         --with-host_os=mingw \
+-        --with-winapi=wmme,directx,wdmks,wasapi \
++        --with-winapi=wmme,directx,wdmks,wasapi,asio \
+         --with-dxdir=$(PREFIX)/$(TARGET) \
+         ac_cv_path_AR=$(TARGET)-ar \
+         $(if $(BUILD_SHARED),\
+             lt_cv_deplibs_check_method='file_magic file format (pe-i386|pe-x86-64)' \
+             lt_cv_file_magic_cmd='$$OBJDUMP -f')
+-    $(MAKE) -C '$(1)' -j '$(JOBS)' $(if $(BUILD_STATIC),SHARED_FLAGS=) TESTS=
++    $(MAKE) -C '$(1)' -j '$(JOBS)' $(if $(BUILD_STATIC),SHARED_FLAGS=) TESTS= EXAMPLES= SELFTESTS=
+     $(MAKE) -C '$(1)' -j 1 install
+ 
+-    '$(TARGET)-gcc' \
+-        -W -Wall -Werror -ansi -pedantic \
+-        '$(TEST_FILE)' -o '$(PREFIX)/$(TARGET)/bin/test-portaudio.exe' \
+-        `'$(TARGET)-pkg-config' portaudio-2.0 --cflags --libs`
++#    '$(TARGET)-gcc' \
++#        -W -Wall -Werror -ansi -pedantic \
++#        '$(TEST_FILE)' -o '$(PREFIX)/$(TARGET)/bin/test-portaudio.exe' \
++#        `'$(TARGET)-pkg-config' portaudio-2.0 --cflags --libs`
+ endef
++

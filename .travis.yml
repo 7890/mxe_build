@@ -24,9 +24,9 @@ before_script:
   - .ci/handle_cache.sh
 
 script:
-#  - echo "nothing to do"
+  - echo "nothing to do"
 #  - jack2/make.sh
-  - fastdb/make.sh
+#  - fastdb/make.sh
 
 after_script:
 
@@ -51,7 +51,7 @@ deploy:
   target-branch: master
   on:
     branch: master
-#    condition: false
+    condition: false
 
 after_deploy:
   - ARTIFACT_FILE=$(ls -1tr "${TRAVIS_BUILD_DIR}/../pages_out" | tail -1)
