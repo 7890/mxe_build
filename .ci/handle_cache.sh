@@ -54,7 +54,7 @@ portaudio_asio()
 		cp "${CACHE_DIR}/asio/asiosdk2.3.zip" .
 		unzip asiosdk2.3.zip
 		sudo mv ASIOSDK2.3 /usr/local/asiosdk2
-		make -C mxe portaudio MXE_TARGETS=$TARGET
+		make MXE_TARGETS=$TARGET portaudio
 		$TARGET-gcc -O2 -shared -o libportaudio-$TARGET.dll -Wl,--whole-archive -lportaudio -Wl,--no-whole-archive -lstdc++ -lwinmm -lole32 -lsetupapi
 		$TARGET-strip libportaudio-$TARGET.dll
 		chmod -x libportaudio-$TARGET.dll
