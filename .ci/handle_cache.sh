@@ -38,7 +38,7 @@ initial_mxe_build()
 #========================================================================
 portaudio_asio()
 {
-	if [ ! -d "${CACHE_DIR}/asio/asiosdk2.3.zip" ]; then
+	if [ ! -f "${CACHE_DIR}/asio/asiosdk2.3.zip" ]; then
 		echo "first time run"
 		mkdir -p "${CACHE_DIR}/asio"
 		cd "${CACHE_DIR}/asio"
