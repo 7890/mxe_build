@@ -55,10 +55,10 @@ portaudio_asio()
 		unzip asiosdk2.3.zip
 		sudo mv ASIOSDK2.3 /usr/local/asiosdk2
 		make MXE_TARGETS=$TARGET portaudio
-		$TARGET-gcc -O2 -shared -o libportaudio-$TARGET.dll -Wl,--whole-archive -lportaudio -Wl,--no-whole-archive -lstdc++ -lwinmm -lole32 -lsetupapi
-		$TARGET-strip libportaudio-$TARGET.dll
+		./usr/bin/$TARGET-gcc -O2 -shared -o libportaudio-$TARGET.dll -Wl,--whole-archive -lportaudio -Wl,--no-whole-archive -lstdc++ -lwinmm -lole32 -lsetupapi
+		./usr/bin/$TARGET-strip libportaudio-$TARGET.dll
 		chmod -x libportaudio-$TARGET.dll
-		rm -r /usr/local/asiosdk2
+		rm -rf /usr/local/asiosdk2
 	done
 
 	ls -l libportaudio*
