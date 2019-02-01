@@ -35,6 +35,7 @@ initial_mxe_build()
 	killall -9 dummy_output.sh
 }
 
+#after targets are available
 #========================================================================
 portaudio_asio()
 {
@@ -107,6 +108,9 @@ download_and_build_nsis()
 	cd "${CACHE_DIR}"
 }
 
+#force rebuild
+rm -rf "${CACHE_DIR}/nsis"
+
 if [ ! -d "${CACHE_DIR}/nsis" ]; then
 	echo "first time run"
 	download_and_build_nsis
@@ -140,7 +144,7 @@ fi
 #===TARGETS=== (build one by one)
 #initial_mxe_build i686-w64-mingw32.shared
 #initial_mxe_build i686-w64-mingw32.static
-#initial_mxe_build x86_64-w64-mingw32.shared
+initial_mxe_build x86_64-w64-mingw32.shared
 #initial_mxe_build x86_64-w64-mingw32.static
 #=============
 
