@@ -44,7 +44,7 @@ portaudio_asio()
 		echo "first time run"
 		mkdir -p "${CACHE_DIR}/asio"
 		cd "${CACHE_DIR}/asio"
-		wget http://www.steinberg.net/sdk_downloads/asiosdk2.3.zip
+		wget -q http://www.steinberg.net/sdk_downloads/asiosdk2.3.zip
 	fi
 
 	cd "${CACHE_DIR}"
@@ -111,6 +111,8 @@ if [ ! -d "${CACHE_DIR}/nsis" ]; then
 	echo "first time run"
 	download_and_build_nsis
 else
+	cd "${CACHE_DIR}"
+	echo "nsis minimal test"
 cat - > hello.nsi << _EOF_
 Name "Hello World"
 OutFile "helloworld.exe"
@@ -118,8 +120,6 @@ Section "Hello World"
 MessageBox MB_OK "Hello World!"
 SectionEnd
 _EOF_
-	cd "${CACHE_DIR}"
-	echo "nsis minimal test"
 	nsis/makensis hello.nsi
 	ls -l helloworld.exe
 	rm -f hello.nsi helloworld.exe
