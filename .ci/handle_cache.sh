@@ -103,22 +103,23 @@ download_and_build_nsis()
 
 	#binary to use
 	echo "`pwd`/bin/makensis"
+}
 
-	cat - > hello.nsi << _EOF_
+if [ ! -d "${CACHE_DIR}/nsis" ]; then
+	echo "first time run"
+	download_and_build_nsis
+else
+cat - > hello.nsi << _EOF_
 Name "Hello World"
 OutFile "helloworld.exe"
 Section "Hello World"
 MessageBox MB_OK "Hello World!"
 SectionEnd
 _EOF_
-
-	./makensis hello.nsi
+	echo "nsis minimal test"
+	nsis/makensis hello.nsi
 	ls -l helloworld.exe
-}
-
-if [ ! -d "${CACHE_DIR}/nsis" ]; then
-	echo "first time run"
-	download_and_build_nsis
+	rm -f hello.nsi helloworld.exe
 fi
 
 #problem for large builds:
