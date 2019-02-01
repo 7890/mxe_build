@@ -6,8 +6,8 @@ if [ ! -d "${CACHE_DIR}/src" ]; then
 	echo "first time run"
 	mkdir -p "${CACHE_DIR}"
 	cd "${CACHE_DIR}"
-	echo "clone https://github.com/mxe/mxe ."
-	git clone https://github.com/mxe/mxe .
+	echo "clone https://github.com/7890/mxe ."
+	git clone https://github.com/7890/mxe .
 fi
 
 if [ ! -f "${CACHE_DIR}/shout" ]; then
@@ -16,8 +16,8 @@ if [ ! -f "${CACHE_DIR}/shout" ]; then
 	echo "clone https://github.com/7890/shout shout_src"
 	git clone https://github.com/7890/shout shout_src
 	cd shout_src && make && sudo make install
+	cp build/c/cshout ../shout
 	cd ..
-	cp build/c/cshout shout
 	rm -rf shout_src
 	shout "test big"
 fi
