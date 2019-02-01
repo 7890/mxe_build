@@ -4,7 +4,8 @@ set -e
 
 shout --plain "==jack2"
 
-JACK_REPO_CLONE_LINE="git clone https://github.com/7890/jack2 jack2"
+#JACK_REPO_CLONE_LINE="git clone https://github.com/7890/jack2 jack2"
+JACK_REPO_CLONE_LINE="git clone https://github.com/jackaudio/jack2 jack2"
 DEBUG=
 
 cd "${TRAVIS_BUILD_DIR}"
