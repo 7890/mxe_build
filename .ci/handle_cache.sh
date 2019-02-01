@@ -48,7 +48,7 @@ portaudio_asio()
 	cp "${TRAVIS_BUILD_DIR}/jack2/portaudio.mk.diff" .
 	patch -p 1 < portaudio.mk.diff
 
-	unzip asiosdk2.3.zip
+	unzip "${CACHE_DIR}/asio/asiosdk2.3.zip"
 	sudo mv ASIOSDK2.3 /usr/local/asiosdk2
 
 	#https://github.com/spatialaudio/portaudio-binaries
