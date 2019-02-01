@@ -24,8 +24,8 @@ before_script:
   - .ci/handle_cache.sh
 
 script:
-  - echo "nothing to do"
-#  - jack2/make.sh
+#  - echo "nothing to do"
+  - jack2/make.sh
 #  - fastdb/make.sh
 
 after_script:

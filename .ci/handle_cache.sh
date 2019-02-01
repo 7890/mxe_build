@@ -23,7 +23,7 @@ initial_mxe_build()
 	#starting dummy output: some targets take a long time, travis would stop after 10min without output
 	 "${TRAVIS_BUILD_DIR}/.ci/dummy_output.sh" &
 
-	INITIAL_PACKAGES="cc cmake waf scons libsndfile db libsamplerate portaudio libgnurx readline liblo"
+	INITIAL_PACKAGES="cc cmake waf libsndfile db libsamplerate portaudio libgnurx readline liblo"
 
 	echo "mxe HEAD is `git rev-parse HEAD`"
 	echo "building target $TARGET"
@@ -129,10 +129,10 @@ _EOF_
 #all done after ca. 40 minutes
 
 #===TARGETS=== (build one by one)
-initial_mxe_build i686-w64-mingw32.shared
-initial_mxe_build i686-w64-mingw32.static
-initial_mxe_build x86_64-w64-mingw32.shared
-initial_mxe_build x86_64-w64-mingw32.static
+#initial_mxe_build i686-w64-mingw32.shared
+#initial_mxe_build i686-w64-mingw32.static
+#initial_mxe_build x86_64-w64-mingw32.shared
+#initial_mxe_build x86_64-w64-mingw32.static
 #=============
 
 #build portaudio with asio headers (one by one)

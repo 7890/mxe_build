@@ -46,7 +46,8 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
   sed \
   unzip \
   wget \
-  xz-utils
+  xz-utils \
+  scons
 fi
 
 exit 0
