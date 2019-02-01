@@ -53,7 +53,7 @@ portaudio_asio()
 	cp "${TRAVIS_BUILD_DIR}/jack2/portaudio.mk.diff" .
 	patch -p 1 < portaudio.mk.diff
 
-	unzip "${CACHE_DIR}/asio/asiosdk2.3.zip"
+	unzip -q "${CACHE_DIR}/asio/asiosdk2.3.zip"
 	sudo mv ASIOSDK2.3 /usr/local/asiosdk2
 
 	#https://github.com/spatialaudio/portaudio-binaries
@@ -83,12 +83,12 @@ download_and_build_nsis()
 	#extract
 	bunzip2 nsis-3.04-src.tar.bz2
 	tar xf nsis-3.04-src.tar
-	unzip nsis-3.04.zip
+	unzip -q nsis-3.04.zip
 	cd nsis-3.04-src
 	#build
-	scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all NSIS_CONFIG_CONST_DATA=no INST_PREFIX="$INST_PREFIX" install-compiler -j3
+	scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all NSIS_CONFIG_CONST_DATA=no PREFIX="$INST_PREFIX" install-compiler -j10
 	#post tasks
-	cd "${PREFIX}"
+	cd "${INST_PREFIX}"
 	mkdir -p "share/nsis"
 	cp -r nsis-3.04/Stubs/ share/nsis/
 	mv bin/makensis .
