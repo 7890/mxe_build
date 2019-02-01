@@ -117,11 +117,11 @@ download_and_build_nsis()
 #force rebuild
 #rm -rf "${CACHE_DIR}/nsis"
 
-if [ ! -d "${CACHE_DIR}/nsis" ]; then
-	echo "first time run"
-	download_and_build_nsis
-else
+if [ ! -f "${CACHE_DIR}/nsis_ok" ]; then
 	cd "${CACHE_DIR}"
+	echo "first time run"
+	rm -rf nsis
+	download_and_build_nsis
 	echo "nsis minimal test"
 cat - > hello.nsi << _EOF_
 Name "Hello World"
@@ -131,6 +131,7 @@ MessageBox MB_OK "Hello World!"
 SectionEnd
 _EOF_
 	nsis/makensis hello.nsi
+	echo "ok" > nsis_ok
 	ls -l helloworld.exe
 	rm -f hello.nsi helloworld.exe
 fi
