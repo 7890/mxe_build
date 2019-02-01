@@ -12,6 +12,7 @@ cd ..
 rm -rf jack2
 $JACK_REPO_CLONE_LINE
 #cp "${TRAVIS_BUILD_DIR}/jack2/Makefile.mingw" jack2
+cp "${TRAVIS_BUILD_DIR}/jack2/waf_build.sh" jack2
 cd jack2
 JACK_REPO_HEAD=`git rev-parse HEAD`
 JACK_VERSION=`cat wscript|grep "^VERSION='"|cut -d"'" -f2`
