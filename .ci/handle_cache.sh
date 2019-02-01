@@ -2,17 +2,21 @@
 
 set -e
 
-CACHE_DIR="${TRAVIS_BUILD_DIR}/../mxe"
-
-#echo "cache contents:"
-#ls -l "${CACHE_DIR}"
-
 if [ ! -d "${CACHE_DIR}/src" ]; then
 	echo "first time run"
 	mkdir -p "${CACHE_DIR}"
 	cd "${CACHE_DIR}"
 	echo "clone https://github.com/mxe/mxe ."
 	git clone https://github.com/mxe/mxe .
+fi
+
+if [ ! -f "${CACHE_DIR}/shout" ]; then
+	echo "first time run"
+	cd "${CACHE_DIR}"
+	echo "clone https://github.com/7890/shout shout_src"
+	git clone https://github.com/7890/shout shout_src
+	cd shout_src && make && sudo make install
+	shout "foo bar"
 fi
 
 #========================================================================
@@ -149,14 +153,14 @@ fi
 #all done after ca. 40 minutes
 
 #===TARGETS=== (build one by one)
-initial_mxe_build i686-w64-mingw32.shared
-initial_mxe_build i686-w64-mingw32.static
-initial_mxe_build x86_64-w64-mingw32.shared
-initial_mxe_build x86_64-w64-mingw32.static
+#initial_mxe_build i686-w64-mingw32.shared
+#initial_mxe_build i686-w64-mingw32.static
+#initial_mxe_build x86_64-w64-mingw32.shared
+#initial_mxe_build x86_64-w64-mingw32.static
 #=============
 
 #build portaudio with asio headers (one by one)
 #portaudio_asio i686-w64-mingw32.static
-portaudio_asio x86_64-w64-mingw32.static
+#portaudio_asio x86_64-w64-mingw32.static
 
 #EOF

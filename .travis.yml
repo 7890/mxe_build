@@ -1,51 +1,54 @@
 language:
-  - cpp
+- cpp
 
 cache:
   bundler: true
   timeout: 1000 #seconds
   directories:
-    - "${TRAVIS_BUILD_DIR}/../mxe/"
+  - "${TRAVIS_BUILD_DIR}/../mxe/"
 
 matrix:
   include:
-    # linux with gcc default (4.8)
-    - os: linux
-      dist: trusty
-      compiler: gcc
+  # linux with gcc default (4.8)
+  - os: linux
+    dist: trusty
+    compiler: gcc
 
 before_install:
-  - sudo apt-get -qq update
+- sudo apt-get -qq update
 
 install:
-  - .ci/install-deps.sh
+- .ci/install-deps.sh
 
 before_script:
-  - ls -l "${TRAVIS_BUILD_DIR}/../mxe/"
-  - .ci/handle_cache.sh
+- 'export CACHE_DIR="${TRAVIS_BUILD_DIR}/../mxe"'
+- 'export PAGES_OUT="${TRAVIS_BUILD_DIR}/../pages_out"'
+- ls -l "${CACHE_DIR}"
+- .ci/handle_cache.sh
 
 script:
-  - echo "nothing to do"
-#  - jack2/make.sh
-#  - fastdb/make.sh
+- echo "nothing to do"
+#- jack2/make.sh
+#- fastdb/make.sh
 
 after_script:
 
 before_cache:
-  - ls -l "${TRAVIS_BUILD_DIR}/../mxe/"
+  - ls -l "${CACHE_DIR}"
 
 after_success:
-  - echo "build was successful. fantastic!"
+- shout "ok"
 
 after_failure:
-  - echo "build failed. not lucky today."
+- shout "fail"
 
 before_deploy:
-  - mkdir -p "${TRAVIS_BUILD_DIR}/../pages_out"
+- mkdir -p "${PAGES_OUT}"
+- ls -ltr "${PAGES_OUT}"
 
 deploy:
   provider: pages
-  local-dir: "${TRAVIS_BUILD_DIR}/../pages_out"
+  local-dir: "${PAGES_OUT}"
   skip-cleanup: true
   keep-history: true
   github-token: "${FOO_BAR}"
@@ -56,8 +59,6 @@ deploy:
     condition: false
 
 after_deploy:
-  - ARTIFACT_FILE=$(ls -1tr "${TRAVIS_BUILD_DIR}/../pages_out" | tail -1)
-  - echo "${ARTIFACT_FILE}"
 
 branches:
   only:

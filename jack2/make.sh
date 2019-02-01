@@ -5,9 +5,6 @@ set -e
 JACK_REPO_CLONE_LINE="git clone https://github.com/7890/jack2 jack2"
 DEBUG=
 
-#for variables and use_archive()
-. "${TRAVIS_BUILD_DIR}/.ci/handle_cache.sh"
-
 cd "${TRAVIS_BUILD_DIR}"
 cd ..
 rm -rf jack2
@@ -63,9 +60,9 @@ OUTNAME="jack2_win64_TEST_`date +%s`"
 mv install "$OUTNAME"
 #tar cfvz "${OUTNAME}.tgz" "$OUTNAME"
 
-rm -rf  "${TRAVIS_BUILD_DIR}/../pages_out"
-mkdir   "${TRAVIS_BUILD_DIR}/../pages_out"
-tar cfz "${TRAVIS_BUILD_DIR}/../pages_out/${OUTNAME}.tgz" "${OUTNAME}"
-ls -l   "${TRAVIS_BUILD_DIR}/../pages_out"
+#rm -rf  "${PAGES_OUT}"
+mkdir -p "${PAGES_OUT}"
+tar cfz "${PAGES_OUT}/${OUTNAME}.tgz" "${OUTNAME}"
+ls -l   "${PAGES_OUT}"
 
 #EOF

@@ -5,9 +5,6 @@ set -e
 FDB_REPO_NAME="fastdb"
 FDB_REPO_CLONE_LINE="git clone https://github.com/7890/${FDB_REPO_NAME} ${FDB_REPO_NAME}"
 
-#for variables and use_archive()
-. "${TRAVIS_BUILD_DIR}/.ci/handle_cache.sh"
-
 cd "${TRAVIS_BUILD_DIR}"
 cd ..
 rm -rf ${FDB_REPO_NAME}
@@ -21,7 +18,7 @@ echo "FDB_REPO_HEAD: $FDB_REPO_HEAD"
 echo "FDB_VERSION: $FDB_VERSION"
 
 PATH_SAVE="$PATH"
-export PATH="${TRAVIS_BUILD_DIR}/../mxe/usr/bin:$PATH"
+export PATH="${CACHE_DIR}/usr/bin:$PATH"
 make -f Makefile.mingw
 export PATH="$PATH_SAVE"
 
