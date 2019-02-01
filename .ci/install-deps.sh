@@ -9,7 +9,7 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
   libimage-exiftool-perl \
   ghostscript
 fi
-#exit #
+exit #
 
 #according to mxe.cc these packages need to be installed
 #the travis build image already has some of them installed
