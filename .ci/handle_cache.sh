@@ -29,6 +29,8 @@ initial_mxe_build()
 	echo "building target $TARGET"
 	echo "building packages $INITIAL_PACKAGES"
 
+	git checkout src/portaudio.mk
+
 	#build a common set of packages for given target
 	make MXE_TARGETS=$TARGET $INITIAL_PACKAGES
 
