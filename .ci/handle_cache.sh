@@ -35,6 +35,8 @@ initial_mxe_build()
 #========================================================================
 portaudio_asio()
 {
+	TARGET="$1"
+
 	if [ ! -f "${CACHE_DIR}/asio/asiosdk2.3.zip" ]; then
 		echo "first time run"
 		mkdir -p "${CACHE_DIR}/asio"
@@ -52,17 +54,12 @@ portaudio_asio()
 	sudo mv ASIOSDK2.3 /usr/local/asiosdk2
 
 	#https://github.com/spatialaudio/portaudio-binaries
-	for TARGET in i686-w64-mingw32.static x86_64-w64-mingw32.static
-	do
-		cp "${CACHE_DIR}/asio/asiosdk2.3.zip" .
-#		unzip asiosdk2.3.zip
-#		sudo mv ASIOSDK2.3 /usr/local/asiosdk2
-		make MXE_TARGETS=$TARGET portaudio
-		./usr/bin/$TARGET-gcc -O2 -shared -o libportaudio-$TARGET.dll -Wl,--whole-archive -lportaudio -Wl,--no-whole-archive -lstdc++ -lwinmm -lole32 -lsetupapi
-		./usr/bin/$TARGET-strip libportaudio-$TARGET.dll
-		chmod -x libportaudio-$TARGET.dll
-#		rm -rf /usr/local/asiosdk2
-	done
+#	for TARGET in i686-w64-mingw32.static x86_64-w64-mingw32.static
+	cp "${CACHE_DIR}/asio/asiosdk2.3.zip" .
+	make MXE_TARGETS=$TARGET portaudio
+	./usr/bin/$TARGET-gcc -O2 -shared -o libportaudio-$TARGET.dll -Wl,--whole-archive -lportaudio -Wl,--no-whole-archive -lstdc++ -lwinmm -lole32 -lsetupapi
+	./usr/bin/$TARGET-strip libportaudio-$TARGET.dll
+	chmod -x libportaudio-$TARGET.dll
 
 	ls -l libportaudio*
 }
@@ -87,6 +84,7 @@ portaudio_asio()
 #=============
 
 #build portaudio with asio headers
-portaudio_asio
+portaudio_asio i686-w64-mingw32.static
+#portaudio_asio x86_64-w64-mingw32.static
 
 #EOF
