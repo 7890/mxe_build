@@ -77,9 +77,9 @@ download_and_build_nsis()
 	cd nsis
 	INST_PREFIX="`pwd`"
 	#sources
-	wget "https://sourceforge.net/projects/nsis/files/NSIS 3/3.04/nsis-3.04-src.tar.bz2"
+	wget -q "https://sourceforge.net/projects/nsis/files/NSIS 3/3.04/nsis-3.04-src.tar.bz2"
 	#stubs
-	wget "https://sourceforge.net/projects/nsis/files/NSIS 3/3.04/nsis-3.04.zip"
+	wget -q "https://sourceforge.net/projects/nsis/files/NSIS 3/3.04/nsis-3.04.zip"
 	#extract
 	bunzip2 nsis-3.04-src.tar.bz2
 	tar xf nsis-3.04-src.tar
@@ -116,6 +116,11 @@ _EOF_
 	ls -l helloworld.exe
 }
 
+if [ ! -d "${CACHE_DIR}/nsis" ]; then
+	echo "first time run"
+	download_and_build_nsis
+fi
+
 #problem for large builds:
 #after ~ 50 minutes, travis tells
 #The job exceeded the maximum time limit for jobs, and has been terminated.
@@ -138,8 +143,5 @@ _EOF_
 #build portaudio with asio headers (one by one)
 #portaudio_asio i686-w64-mingw32.static
 #portaudio_asio x86_64-w64-mingw32.static
-
-#one-time
-download_and_build_nsis
 
 #EOF
