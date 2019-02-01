@@ -7,8 +7,6 @@ set -e
 
 CMD_PREFIX="${CACHE_DIR}/usr/bin/x86_64-w64-mingw32.shared"
 
-ls -1 $CMD_PREFIX
-
 rm -rf build
 rm -rf install
 
