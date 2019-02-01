@@ -38,11 +38,10 @@ ls -1 *.exe|while read line; do md5sum "$line"; sha256sum "$line"; exiftool "$li
 ) | unix2dos > files.txt
 cat files.txt
 
+mkdir -p "${PAGES_OUT}"
 cd "${TRAVIS_BUILD_DIR}"
 cd ..
-rm -rf pages_out
-mkdir pages_out
-tar cfz pages_out/${FDB_REPO_NAME}_build_`date +%s`.tgz ${FDB_REPO_NAME}/install
-ls -l pages_out
+tar cfz "${PAGES_OUT}/${FDB_REPO_NAME}_build_`date +%s`.tgz" "${FDB_REPO_NAME}/install"
+ls -l "${PAGES_OUT}"
 
 #EOF

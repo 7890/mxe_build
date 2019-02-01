@@ -27,9 +27,9 @@ before_script:
 - .ci/handle_cache.sh
 
 script:
-- echo "nothing to do"
-#- jack2/make.sh
-#- fastdb/make.sh
+#- echo "nothing to do"
+- jack2/make.sh
+- fastdb/make.sh
 
 after_script:
 
@@ -37,7 +37,7 @@ before_cache:
   - ls -l "${CACHE_DIR}"
 
 after_success:
-- shout "ok"
+- shout "success"
 
 after_failure:
 - shout "fail"
@@ -56,9 +56,10 @@ deploy:
   target-branch: master
   on:
     branch: master
-    condition: false
+#    condition: false
 
 after_deploy:
+- shout "deployed"
 
 branches:
   only:

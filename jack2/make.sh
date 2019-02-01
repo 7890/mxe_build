@@ -58,9 +58,6 @@ cd ..
 
 OUTNAME="jack2_win64_TEST_`date +%s`"
 mv install "$OUTNAME"
-#tar cfvz "${OUTNAME}.tgz" "$OUTNAME"
-
-#rm -rf  "${PAGES_OUT}"
 mkdir -p "${PAGES_OUT}"
 tar cfz "${PAGES_OUT}/${OUTNAME}.tgz" "${OUTNAME}"
 ls -l   "${PAGES_OUT}"
