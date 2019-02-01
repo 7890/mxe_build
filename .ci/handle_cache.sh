@@ -16,8 +16,13 @@ if [ ! -f "${CACHE_DIR}/shout" ]; then
 	echo "clone https://github.com/7890/shout shout_src"
 	git clone https://github.com/7890/shout shout_src
 	cd shout_src && make && sudo make install
-	shout "foo bar"
+	cd ..
+	cp build/c/cshout shout
+	rm -rf shout_src
+	shout "test big"
 fi
+
+sudo cp shout /usr/local/bin
 
 #========================================================================
 initial_mxe_build()
@@ -29,6 +34,7 @@ initial_mxe_build()
 
 	INITIAL_PACKAGES="cc cmake waf libsndfile db libsamplerate portaudio libgnurx readline liblo"
 
+	shout "===="
 	echo "mxe HEAD is `git rev-parse HEAD`"
 	echo "building target $TARGET"
 	echo "building packages $INITIAL_PACKAGES"
