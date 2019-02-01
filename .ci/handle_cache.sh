@@ -4,8 +4,8 @@ set -e
 
 CACHE_DIR="${TRAVIS_BUILD_DIR}/../mxe"
 
-echo "cache contents:"
-ls -l "${CACHE_DIR}"
+#echo "cache contents:"
+#ls -l "${CACHE_DIR}"
 
 if [ ! -d "${CACHE_DIR}/src" ]; then
 	echo "first time run"

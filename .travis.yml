@@ -21,12 +21,13 @@ install:
   - .ci/install-deps.sh
 
 before_script:
+  - ls -l "${TRAVIS_BUILD_DIR}/../mxe/"
   - .ci/handle_cache.sh
 
 script:
 #  - echo "nothing to do"
-  - jack2/make.sh
-#  - fastdb/make.sh
+#  - jack2/make.sh
+  - fastdb/make.sh
 
 after_script:
 
