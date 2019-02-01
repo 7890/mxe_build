@@ -4,6 +4,9 @@ set -e
 
 CACHE_DIR="${TRAVIS_BUILD_DIR}/../mxe"
 
+echo "cache contents:"
+ls -l "${CACHE_DIR}"
+
 if [ ! -d "${CACHE_DIR}/src" ]; then
 	echo "first time run"
 	mkdir -p "${CACHE_DIR}"
@@ -20,7 +23,7 @@ initial_mxe_build()
 	#starting dummy output: some targets take a long time, travis would stop after 10min without output
 	 "${TRAVIS_BUILD_DIR}/.ci/dummy_output.sh" &
 
-	INITIAL_PACKAGES="cc cmake waf libsndfile db libsamplerate portaudio libgnurx readline liblo"
+	INITIAL_PACKAGES="cc cmake waf scons libsndfile db libsamplerate portaudio libgnurx readline liblo"
 
 	echo "mxe HEAD is `git rev-parse HEAD`"
 	echo "building target $TARGET"
@@ -59,9 +62,58 @@ portaudio_asio()
 	make MXE_TARGETS=$TARGET portaudio
 	./usr/bin/$TARGET-gcc -O2 -shared -o libportaudio-$TARGET.dll -Wl,--whole-archive -lportaudio -Wl,--no-whole-archive -lstdc++ -lwinmm -lole32 -lsetupapi
 	./usr/bin/$TARGET-strip libportaudio-$TARGET.dll
-	chmod -x libportaudio-$TARGET.dll
+#	chmod -x libportaudio-$TARGET.dll
 
 	ls -l libportaudio*
+}
+
+#for linux
+#========================================================================
+download_and_build_nsis()
+{
+	cd "${CACHE_DIR}"
+	rm -rf nsis
+	mkdir nsis
+	cd nsis
+	INST_PREFIX="`pwd`"
+	#sources
+	wget "https://sourceforge.net/projects/nsis/files/NSIS 3/3.04/nsis-3.04-src.tar.bz2"
+	#stubs
+	wget "https://sourceforge.net/projects/nsis/files/NSIS 3/3.04/nsis-3.04.zip"
+	#extract
+	bunzip2 nsis-3.04-src.tar.bz2
+	tar xf nsis-3.04-src.tar
+	unzip nsis-3.04.zip
+	cd nsis-3.04-src
+	#build
+	scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all NSIS_CONFIG_CONST_DATA=no INST_PREFIX="$INST_PREFIX" install-compiler -j3
+	#post tasks
+	cd "${PREFIX}"
+	mkdir -p "share/nsis"
+	cp -r nsis-3.04/Stubs/ share/nsis/
+	mv bin/makensis .
+	#clean up
+	rm -rf bin
+	rm -rf nsis-3.04
+	rm -rf nsis-3.04-src
+	mkdir archive
+	mv nsis-3.04-src.tar archive
+	mv nsis-3.04.zip archive
+	touch "archive/`date`"
+
+	#binary to use
+	echo "`pwd`/bin/makensis"
+
+	cat - > hello.nsi << _EOF_
+Name "Hello World"
+OutFile "helloworld.exe"
+Section "Hello World"
+MessageBox MB_OK "Hello World!"
+SectionEnd
+_EOF_
+
+	./makensis hello.nsi
+	ls -l helloworld.exe
 }
 
 #problem for large builds:
@@ -77,14 +129,17 @@ portaudio_asio()
 #all done after ca. 40 minutes
 
 #===TARGETS=== (build one by one)
-#initial_mxe_build i686-w64-mingw32.shared
-#initial_mxe_build i686-w64-mingw32.static
-#initial_mxe_build x86_64-w64-mingw32.shared
-#initial_mxe_build x86_64-w64-mingw32.static
+initial_mxe_build i686-w64-mingw32.shared
+initial_mxe_build i686-w64-mingw32.static
+initial_mxe_build x86_64-w64-mingw32.shared
+initial_mxe_build x86_64-w64-mingw32.static
 #=============
 
 #build portaudio with asio headers (one by one)
 #portaudio_asio i686-w64-mingw32.static
 #portaudio_asio x86_64-w64-mingw32.static
+
+#one-time
+download_and_build_nsis
 
 #EOF

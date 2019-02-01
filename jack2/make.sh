@@ -20,11 +20,6 @@ JACK_VERSION=`cat wscript|grep "^VERSION='"|cut -d"'" -f2`
 echo "JACK_REPO_HEAD: $JACK_REPO_HEAD"
 echo "JACK_VERSION: $JACK_VERSION"
 
-#PATH_SAVE="$PATH"
-#export PATH="${TRAVIS_BUILD_DIR}/../mxe/usr/bin:$PATH"
-#make -f Makefile.mingw
-#export PATH="$PATH_SAVE"
-
 ./waf_build.sh
 
 cd man
@@ -40,10 +35,10 @@ TARGET="x86_64-w64-mingw32.shared"
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libgcc_s_seh-1.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libstdc++-6.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libgnurx-0.dll install/
-#cp ${CACHE_DIR}/usr/${TARGET}/bin/libportaudio-2.dll install/
-cp ${CACHE_DIR}/libportaudio-x86_64-w64-mingw32.static.dll install/libportaudio-2.dll
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libsamplerate-0.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libwinpthread-1.dll install/
+#cp ${CACHE_DIR}/usr/${TARGET}/bin/libportaudio-2.dll install/
+cp ${CACHE_DIR}/libportaudio-x86_64-w64-mingw32.static.dll install/libportaudio-2.dll
 
 mv man/pdf install
 ls -l install
@@ -55,12 +50,7 @@ echo "TRAVIS_JOB_WEB_URL: ${TRAVIS_JOB_WEB_URL}"
 echo "JACK_REPO_CLONE_LINE: ${JACK_REPO_CLONE_LINE}"
 echo "JACK_REPO_HEAD: ${JACK_REPO_HEAD}"
 echo ""
-#md5sum jackd.exe
-#sha256sum jackd.exe
-#exiftool jackd.exe
-#ls -1 *.dll|while read line; do md5sum "$line"; sha256sum "$line"; exiftool "$line"; echo ""; done
-#ls -1 jack/*.dll|while read line; do md5sum "$line"; sha256sum "$line"; exiftool "$line"; echo ""; done
-#ls -1 win32libs/*.dll|while read line; do md5sum "$line"; sha256sum "$line"; exiftool "$line"; echo ""; done
+find . | grep -e "\.exe$" -e "\.dll$" | while read line; do md5sum "$line"; sha256sum "$line"; exiftool "$line"; echo ""; done
 ) | unix2dos > files.txt
 cat files.txt
 cd ..
@@ -69,11 +59,9 @@ OUTNAME="jack2_win64_TEST_`date +%s`"
 mv install "$OUTNAME"
 #tar cfvz "${OUTNAME}.tgz" "$OUTNAME"
 
-cd "${TRAVIS_BUILD_DIR}"
-cd ..
-rm -rf pages_out
-mkdir pages_out
-tar cfz "pages_out/${OUTNAME}.tgz" "jack2/${OUTNAME}"
-ls -l pages_out
+rm -rf  "${TRAVIS_BUILD_DIR}/../pages_out"
+mkdir   "${TRAVIS_BUILD_DIR}/../pages_out"
+tar cfz "${TRAVIS_BUILD_DIR}/../pages_out/${OUTNAME}.tgz" "${OUTNAME}"
+ls -l   "${TRAVIS_BUILD_DIR}/../pages_out"
 
 #EOF
