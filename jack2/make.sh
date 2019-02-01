@@ -25,7 +25,8 @@ echo "JACK_VERSION: $JACK_VERSION"
 #make -f Makefile.mingw
 #export PATH="$PATH_SAVE"
 
-./waf_build.sh
+TARGET="x86_64-w64-mingw32.shared"
+./waf_build.sh "$TARGET"
 
 cd man
 mkdir pdf
@@ -36,13 +37,13 @@ sh fill_template $JACK_VERSION
 ls -1 *.1|while read line; do fn=${line%.*}; groff -t -e -mandoc -t ./"$line"|ps2pdf - pdf/"$fn".pdf; done
 cd ..
 
-cp ${CACHE_DIR}/usr/${BC_ARCH}/bin/libgcc_s_seh-1.dll install/
-cp ${CACHE_DIR}/usr/${BC_ARCH}/bin/libstdc++-6.dll install/
-cp ${CACHE_DIR}/usr/${BC_ARCH}/bin/libgnurx-0.dll install/
-#cp ${CACHE_DIR}/usr/${BC_ARCH}/bin/libportaudio-2.dll install/
+cp ${CACHE_DIR}/usr/${TARGET}/bin/libgcc_s_seh-1.dll install/
+cp ${CACHE_DIR}/usr/${TARGET}/bin/libstdc++-6.dll install/
+cp ${CACHE_DIR}/usr/${TARGET}/bin/libgnurx-0.dll install/
+#cp ${CACHE_DIR}/usr/${TARGET}/bin/libportaudio-2.dll install/
 cp ${CACHE_DIR}/libportaudio-x86_64-w64-mingw32.static.dll install/libportaudio-2.dll
-cp ${CACHE_DIR}/usr/${BC_ARCH}/bin/libsamplerate-0.dll install/
-cp ${CACHE_DIR}/usr/${BC_ARCH}/bin/libwinpthread-1.dll install/
+cp ${CACHE_DIR}/usr/${TARGET}/bin/libsamplerate-0.dll install/
+cp ${CACHE_DIR}/usr/${TARGET}/bin/libwinpthread-1.dll install/
 
 mv man/pdf install
 ls -l install
