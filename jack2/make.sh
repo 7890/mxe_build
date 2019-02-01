@@ -3,6 +3,7 @@
 set -e
 
 JACK_REPO_CLONE_LINE="git clone https://github.com/7890/jack2 jack2"
+DEBUG=
 
 #for variables and use_archive()
 . "${TRAVIS_BUILD_DIR}/.ci/handle_cache.sh"

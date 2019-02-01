@@ -103,6 +103,8 @@ download_and_build_nsis()
 
 	#binary to use
 	echo "`pwd`/bin/makensis"
+
+	cd "${CACHE_DIR}"
 }
 
 if [ ! -d "${CACHE_DIR}/nsis" ]; then
@@ -116,6 +118,7 @@ Section "Hello World"
 MessageBox MB_OK "Hello World!"
 SectionEnd
 _EOF_
+	cd "${CACHE_DIR}"
 	echo "nsis minimal test"
 	nsis/makensis hello.nsi
 	ls -l helloworld.exe
