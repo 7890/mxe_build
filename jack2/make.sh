@@ -25,8 +25,7 @@ echo "JACK_VERSION: $JACK_VERSION"
 #make -f Makefile.mingw
 #export PATH="$PATH_SAVE"
 
-TARGET="x86_64-w64-mingw32.shared"
-./waf_build.sh "$TARGET"
+./waf_build.sh
 
 cd man
 mkdir pdf
@@ -37,6 +36,7 @@ sh fill_template $JACK_VERSION
 ls -1 *.1|while read line; do fn=${line%.*}; groff -t -e -mandoc -t ./"$line"|ps2pdf - pdf/"$fn".pdf; done
 cd ..
 
+TARGET="x86_64-w64-mingw32.shared"
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libgcc_s_seh-1.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libstdc++-6.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libgnurx-0.dll install/
