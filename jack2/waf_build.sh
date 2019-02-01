@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MXEPATH=/home/travis/build/7890/mxe"
+MXEPATH="/home/travis/build/7890/mxe"
 
 BC_ARCH="x86_64-w64-mingw32.shared"
 
