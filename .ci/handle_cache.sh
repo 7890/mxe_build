@@ -84,7 +84,7 @@ portaudio_asio()
 #=============
 
 #build portaudio with asio headers
-portaudio_asio i686-w64-mingw32.static
-#portaudio_asio x86_64-w64-mingw32.static
+#portaudio_asio i686-w64-mingw32.static
+portaudio_asio x86_64-w64-mingw32.static
 
 #EOF
