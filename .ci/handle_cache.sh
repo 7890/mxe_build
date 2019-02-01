@@ -19,7 +19,7 @@ if [ ! -f "${CACHE_DIR}/shout" ]; then
 	cp build/c/cshout ../shout
 	cd ..
 	rm -rf shout_src
-	shout "test big"
+	shout --plain "test big"
 fi
 
 sudo cp "${CACHE_DIR}/shout" /usr/local/bin
@@ -34,7 +34,7 @@ initial_mxe_build()
 
 	INITIAL_PACKAGES="cc cmake waf libsndfile db libsamplerate portaudio libgnurx readline liblo"
 
-	shout "===="
+	shout --plain "===="
 	echo "mxe HEAD is `git rev-parse HEAD`"
 	echo "building target $TARGET"
 	echo "building packages $INITIAL_PACKAGES"

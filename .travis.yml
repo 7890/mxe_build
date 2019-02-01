@@ -30,7 +30,7 @@ before_script:
 script:
 #- echo "nothing to do"
 - jack2/make.sh
-- fastdb/make.sh
+#- fastdb/make.sh
 
 after_script:
 
@@ -55,7 +55,7 @@ deploy:
   target-branch: master
   on:
     branch: master
-    condition: false
+#    condition: false
 
 after_deploy:
 

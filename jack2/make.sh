@@ -2,7 +2,7 @@
 
 set -e
 
-shout "==jack2"
+shout --plain "==jack2"
 
 JACK_REPO_CLONE_LINE="git clone https://github.com/7890/jack2 jack2"
 DEBUG=
@@ -64,6 +64,6 @@ mkdir -p "${PAGES_OUT}"
 tar cfz "${PAGES_OUT}/${OUTNAME}.tgz" "${OUTNAME}"
 ls -l   "${PAGES_OUT}"
 
-shout success
+shout --plain success
 
 #EOF
