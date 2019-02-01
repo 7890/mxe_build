@@ -43,6 +43,8 @@ portaudio_asio()
 {
 	TARGET="$1"
 
+	ls -l "${CACHE_DIR}/usr/bin/$TARGET-gcc"
+
 	if [ ! -f "${CACHE_DIR}/asio/asiosdk2.3.zip" ]; then
 		echo "first time run"
 		mkdir -p "${CACHE_DIR}/asio"
@@ -68,6 +70,8 @@ portaudio_asio()
 #	chmod -x libportaudio-$TARGET.dll
 
 	ls -l libportaudio*
+
+	exit 0
 }
 
 #for linux
@@ -111,7 +115,7 @@ download_and_build_nsis()
 }
 
 #force rebuild
-rm -rf "${CACHE_DIR}/nsis"
+#rm -rf "${CACHE_DIR}/nsis"
 
 if [ ! -d "${CACHE_DIR}/nsis" ]; then
 	echo "first time run"
@@ -146,8 +150,8 @@ fi
 #===TARGETS=== (build one by one)
 #initial_mxe_build i686-w64-mingw32.shared
 #initial_mxe_build i686-w64-mingw32.static
-initial_mxe_build x86_64-w64-mingw32.shared
-#initial_mxe_build x86_64-w64-mingw32.static
+#initial_mxe_build x86_64-w64-mingw32.shared
+initial_mxe_build x86_64-w64-mingw32.static
 #=============
 
 #build portaudio with asio headers (one by one)
