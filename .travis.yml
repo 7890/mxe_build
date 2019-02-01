@@ -25,7 +25,7 @@ before_script:
 - 'export PAGES_OUT="${TRAVIS_BUILD_DIR}/../pages_out"'
 - ls -l "${CACHE_DIR}"
 - .ci/handle_cache.sh
-- du -hs .
+- du -hs "${CACHE_DIR}"
 
 script:
 #- echo "nothing to do"
@@ -38,10 +38,8 @@ before_cache:
   - ls -l "${CACHE_DIR}"
 
 after_success:
-- shout "success"
 
 after_failure:
-- shout "fail"
 
 before_deploy:
 - mkdir -p "${PAGES_OUT}"
@@ -57,10 +55,9 @@ deploy:
   target-branch: master
   on:
     branch: master
-#    condition: false
+    condition: false
 
 after_deploy:
-- shout "deployed"
 
 branches:
   only:

@@ -2,6 +2,8 @@
 
 set -e
 
+shout "==fastdb"
+
 FDB_REPO_NAME="fastdb"
 FDB_REPO_CLONE_LINE="git clone https://github.com/7890/${FDB_REPO_NAME} ${FDB_REPO_NAME}"
 
@@ -43,5 +45,7 @@ cd "${TRAVIS_BUILD_DIR}"
 cd ..
 tar cfz "${PAGES_OUT}/${FDB_REPO_NAME}_build_`date +%s`.tgz" "${FDB_REPO_NAME}/install"
 ls -l "${PAGES_OUT}"
+
+shout success
 
 #EOF
