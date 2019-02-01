@@ -7,7 +7,9 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
   sudo apt-get install -y \
   dos2unix \
   libimage-exiftool-perl \
-  ghostscript
+  ghostscript \
+  imagemagick \
+  bc
 fi
 #exit #
 
