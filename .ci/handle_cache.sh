@@ -149,14 +149,14 @@ fi
 #all done after ca. 40 minutes
 
 #===TARGETS=== (build one by one)
-#initial_mxe_build i686-w64-mingw32.shared
-#initial_mxe_build i686-w64-mingw32.static
-#initial_mxe_build x86_64-w64-mingw32.shared
+initial_mxe_build i686-w64-mingw32.shared
+initial_mxe_build i686-w64-mingw32.static
+initial_mxe_build x86_64-w64-mingw32.shared
 initial_mxe_build x86_64-w64-mingw32.static
 #=============
 
 #build portaudio with asio headers (one by one)
 #portaudio_asio i686-w64-mingw32.static
-#portaudio_asio x86_64-w64-mingw32.static
+portaudio_asio x86_64-w64-mingw32.static
 
 #EOF
