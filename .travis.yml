@@ -25,6 +25,7 @@ before_script:
 - 'export PAGES_OUT="${TRAVIS_BUILD_DIR}/../pages_out"'
 - ls -l "${CACHE_DIR}"
 - .ci/handle_cache.sh
+- du -hs .
 
 script:
 #- echo "nothing to do"

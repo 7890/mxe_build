@@ -22,7 +22,7 @@ if [ ! -f "${CACHE_DIR}/shout" ]; then
 	shout "test big"
 fi
 
-sudo cp shout /usr/local/bin
+sudo cp "${CACHE_DIR}/shout" /usr/local/bin
 
 #========================================================================
 initial_mxe_build()
