@@ -8,6 +8,11 @@ JACK_REPO_CLONE_LINE="git clone https://github.com/7890/jack2 jack2"
 #JACK_REPO_CLONE_LINE="git clone https://github.com/jackaudio/jack2 jack2"
 DEBUG=
 
+TARGET="x86_64-w64-mingw32.shared"
+
+cp ${CACHE_DIR}/usr/$TARGET/lib/libdb-6.1.la ${CACHE_DIR}/usr/$TARGET/lib/libdb.la
+cp ${CACHE_DIR}/usr/$TARGET/lib/libdb-6.1.dll.a ${CACHE_DIR}/usr/$TARGET/lib/libdb.dll.a
+
 cd "${TRAVIS_BUILD_DIR}"
 cd ..
 rm -rf jack2
@@ -35,7 +40,6 @@ sh fill_template $JACK_VERSION
 ls -1 *.1|while read line; do fn=${line%.*}; groff -t -e -mandoc -t ./"$line"|ps2pdf - pdf/"$fn".pdf; done
 cd ..
 
-TARGET="x86_64-w64-mingw32.shared"
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libgcc_s_seh-1.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libstdc++-6.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libgnurx-0.dll install/
