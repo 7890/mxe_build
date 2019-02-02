@@ -4,8 +4,8 @@ set -e
 
 shout --plain "==jack2"
 
-#JACK_REPO_CLONE_LINE="git clone https://github.com/7890/jack2 jack2"
-JACK_REPO_CLONE_LINE="git clone https://github.com/jackaudio/jack2 jack2"
+JACK_REPO_CLONE_LINE="git clone https://github.com/7890/jack2 jack2"
+#JACK_REPO_CLONE_LINE="git clone https://github.com/jackaudio/jack2 jack2"
 DEBUG=
 
 cd "${TRAVIS_BUILD_DIR}"
@@ -40,6 +40,7 @@ cp ${CACHE_DIR}/usr/${TARGET}/bin/libgcc_s_seh-1.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libstdc++-6.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libgnurx-0.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libsamplerate-0.dll install/
+cp ${CACHE_DIR}/usr/${TARGET}/bin/libsndfile-1.dll install/
 cp ${CACHE_DIR}/usr/${TARGET}/bin/libwinpthread-1.dll install/
 #cp ${CACHE_DIR}/usr/${TARGET}/bin/libportaudio-2.dll install/
 cp ${CACHE_DIR}/libportaudio-x86_64-w64-mingw32.static.dll install/libportaudio-2.dll
