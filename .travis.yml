@@ -55,7 +55,7 @@ deploy:
   target-branch: master
   on:
     branch: master
-    condition: false
+    condition: 1=2
 
 after_deploy:
 
